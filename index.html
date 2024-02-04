@@ -1,0 +1,39 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .todo {
+            margin: 10px 0;
+        }
+        .todo span {
+            cursor: pointer;
+        }
+        .todo.done span {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <h1>Todo List</h1>
+    <form action="/add" method="POST">
+        <input type="text" name="text" placeholder="Yeni görev ekle..." required>
+        <button type="submit">Ekle</button>
+    </form>
+
+    <ul>
+        {{ range . }}
+        <li class="todo {{ if .Completed }} completed {{ end }}">
+            <span onclick="location.href='/toggle?id={{.ID}}'">{{ .Title }}</span>
+        </li>
+        {{ end }}
+    </ul>
+</body>
+</html>
